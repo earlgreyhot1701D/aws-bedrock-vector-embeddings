@@ -1,4 +1,4 @@
-# Cal Poly AI Summer Camp: Text Embedding Similarity Analyzer
+# Cal Poly AI Summer Camp: Generate Vector Embeddings for Text
 
 Welcome to our AI Summer Camp! This project will teach you how to use Large Language Models (LLMs) to generate text embeddings and calculate semantic similarity between different texts. You'll learn how to transform text into numerical vectors and measure how similar different pieces of text are to each other using Python and Amazon Web Services (AWS) Bedrock.
 
