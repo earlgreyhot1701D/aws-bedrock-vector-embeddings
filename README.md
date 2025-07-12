@@ -13,13 +13,16 @@ Feel free to reach out if you have questions about:
 - Ideas for extending this project
 - General questions about AI and text similarity analysis
 
+## Video Tutorial
+
+For a complete walkthrough of this project, check out my video explanation:
+[AI Summer Camp Tutorial - Generating Vector Embeddings with AWS Bedrock](https://drive.google.com/file/d/1L0xaXiEZtAuLccpL0L2K7PkZeh4dQp3m/view?usp=sharing)
+
 ## What You'll Learn
 
-- **Text Embeddings**: Converting text into numerical vectors that capture semantic meaning
-- **Cosine Similarity**: Mathematical method to measure how similar two texts are
-- **AWS Bedrock Titan**: Amazon's embedding model for generating high-quality text representations
-- **Python Programming**: Writing code to process text and perform similarity calculations
-- **JSON Data Format**: Working with structured data for embeddings and similarity results
+- **Vector Embeddings**: Converting text/data into numerical vectors that capture semantic meaning
+- **Cosine Similarity**: Mathematical method to measure how similar two vectors are
+- **AWS Bedrock Titan**: Amazon's embedding model
 
 ## What This Code Does
 
@@ -28,8 +31,7 @@ This project demonstrates how to use AI to analyze text similarity through embed
 1. **Connects to AWS Bedrock**: Uses Amazon Titan embedding model to convert text to vectors
 2. **Generates Text Embeddings**: Creates numerical representations of text that capture meaning
 3. **Calculates Cosine Similarity**: Measures how similar different texts are to each other
-4. **Handles File Input**: Optionally reads additional text from a file for analysis
-5. **Saves Results**: Outputs embeddings and similarity scores to JSON files
+4. **Saves Results**: Outputs embeddings and similarity scores to JSON files
 
 ## Prerequisites
 
@@ -56,11 +58,11 @@ pip install boto3
 
 **boto3**: Amazon's Python library that lets us connect to AWS services. Think of it as a bridge between your Python code and Amazon's AI models.
 
-**Text Embeddings**: High-dimensional numerical vectors that represent the meaning of text. Similar texts will have similar embeddings.
+**Vector Embeddings**: High-dimensional numerical vectors that represent the meaning of data. Similar data will have similar embeddings.
 
 **Cosine Similarity**: A mathematical measure that calculates how similar two vectors are, ranging from 0 (completely different) to 1 (identical).
 
-**AWS Bedrock Titan**: Amazon's embedding model that converts text into high-quality vector representations.
+**Amazon Titan V2**: Amazon's embedding model that converts data into high-quality vector representations.
 
 ### The Functions Explained
 
@@ -68,8 +70,7 @@ pip install boto3
 This function calculates how similar two embedding vectors are:
 - Takes two lists of numbers (embeddings) as input
 - Computes the dot product and norms of both vectors
-- Returns a similarity score between 0 and 1
-- Handles edge cases where vectors might be empty
+- Returns a similarity score between 0 and 1 (note cosine similarity can be [-1,1])
 
 #### Function 2: `get_embedding(text)`
 This function converts text into embedding vectors:
@@ -83,34 +84,29 @@ This function compares all texts with each other:
 - Takes a list of text-embedding pairs
 - Calculates cosine similarity for every pair combination
 - Saves all similarity scores to a JSON file
-- Avoids duplicate comparisons (A vs B is same as B vs A)
 
 #### Function 4: `main()`
 This is the main function that orchestrates the entire process:
-- Defines default texts to analyze
-- Optionally reads additional text from a file
 - Generates embeddings for all texts
-- Saves embeddings and calculates similarities
+- Saves embeddings and outputs cosine similarities
 
 ## How to Run the Code
 
-1. **Save the code**: Copy the code into a file called `text_similarity.py`
+1. **Save the code**: Clone this repo or copy the code into a file called `text_similarity.py`
 
-2. **Optional: Create a test file**: Create a file called `test_embed.txt` with any text you want to analyze
+2. **Open your terminal/command prompt**
 
-3. **Open your terminal/command prompt**
-
-4. **Navigate to your project folder**:
+3. **Navigate to your project folder**:
    ```bash
    cd path/to/your/project
    ```
 
-5. **Run the code**:
+4. **Run the code**:
    ```bash
    python text_similarity.py
    ```
 
-6. **Check the output**: Look for these files in your project folder:
+5. **Check the output**: Look for these files in your project folder:
    - `embeddings_output.json` - Contains all text embeddings
    - `cosine_similarities.json` - Contains similarity scores between all text pairs
 
@@ -133,12 +129,6 @@ texts = [
 ]
 ```
 
-### Use Different AWS Region
-Change the region in the `get_embedding()` function:
-```python
-client = boto3.client('bedrock-runtime', region_name="us-east-1")  # Instead of us-west-2
-```
-
 ## Understanding the Generated Data
 
 ### Embeddings Output (`embeddings_output.json`)
@@ -159,18 +149,10 @@ Contains similarity scores for all text pairs:
   {
     "text_a": "Hello, world!",
     "text_b": "Hello Everyone!",
-    "similarity": 0.85
+    "similarity": 0.509
   }
 ]
 ```
-
-## Interpreting Similarity Scores
-
-- **0.9 - 1.0**: Very similar texts (near duplicates)
-- **0.7 - 0.9**: Similar meaning or topic
-- **0.5 - 0.7**: Somewhat related
-- **0.3 - 0.5**: Loosely related
-- **0.0 - 0.3**: Very different topics
 
 ## Common Issues and Solutions
 
@@ -231,14 +213,17 @@ If you run into issues:
 ## Example Results
 
 After running the code, you might see similarity scores like:
-- "Hello, world!" vs "Hello Everyone!" = 0.85 (very similar greetings)
-- "AWS Bedrock Titan embeddings are cool." vs "This is a simple example." = 0.12 (different topics)
+- "Hello, world!" vs "Hello Everyone!" = 0.509 (very similar greetings)
+- "AWS Bedrock Titan embeddings are cool." vs "Hello, world!" = 0.095 (different topics)
 
 ## Resources for Further Learning
 
 - [AWS Bedrock Documentation](https://docs.aws.amazon.com/bedrock/)
+- [Vector Embedding Video](https://www.youtube.com/watch?v=NEreO2zlXDk)
+- [Vector Embeddings Reading](https://aws.amazon.com/what-is/embeddings-in-machine-learning/)
 - [Understanding Text Embeddings](https://platform.openai.com/docs/guides/embeddings)
-- [Cosine Similarity Explained](https://en.wikipedia.org/wiki/Cosine_similarity)
+- [Cosine Similarity Wiki](https://en.wikipedia.org/wiki/Cosine_similarity)
+- [Cosine Similarity Video](https://www.youtube.com/watch?v=e9U0QAFbfLI)
 - [boto3 Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
 - [Vector Similarity Search](https://aws.amazon.com/what-is/vector-databases/)
 
