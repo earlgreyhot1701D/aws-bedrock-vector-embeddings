@@ -234,3 +234,10 @@ After running the code, you might see similarity scores like:
 ---
 
 Happy coding! 🚀
+
+---
+
+✍️ CCC AI Camp Learner Note (July 2025)
+
+This repo clarified how embeddings work behind the scenes to support semantic search. I’m documenting how this approach could reduce workload in policy lookup or form classification in court operations.
+
